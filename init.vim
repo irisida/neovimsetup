@@ -20,7 +20,10 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 colorscheme onedark
-map <silent> <c-n> :NERDTreeFocus<CR>
+nmap <silent> <C-n> :NERDTreeToggle<CR>
+vmap @@@ <plug>NERDCommenterToggle
+nmap @@@ <plug>NERDCommenterToggle
+
 
 filetype plugin indent on   " required
 
