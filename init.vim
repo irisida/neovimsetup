@@ -14,6 +14,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'preservim/nerdtree'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'fatih/vim-go'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'airblade/vim-gitgutter'
@@ -21,6 +22,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ryanoasis/vim-webdevicons'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 call plug#end()
 
 " ------------------------------------------- 
@@ -29,6 +31,14 @@ call plug#end()
 colorscheme onedark
 " airline bottom bar theme 
 let g:airline_theme='bubblegum'
+" GVim
+
+" auto reloading changed files
+"set autoread
+"autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" notification after file change
+"autocmd FileChangedShellPost *
+"\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 
 " -- general vim set options 
@@ -37,7 +47,9 @@ set wrap
 set smartcase
 set hlsearch
 set noerrorbells
-set tabstop=4 softtabstop=4
+set tabstop=4 
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 set smartindent
 set splitbelow
@@ -81,10 +93,13 @@ let g:coc_global_extensions = [
 \ 'coc-json'
 \ ]
 
+" language related 
+let g:go_fmt_autosave = 1
+
 " ------------------------------------------
 " -- neovim terminal settings 
 " ------------------------------------------ 
-nnoremap <esc><esc> :12sp \| term<CR>
+nnoremap <C-t> :12sp \| term<CR>
 tnoremap <esc> <C-\><:q!CR>
 
 
