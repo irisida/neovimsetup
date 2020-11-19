@@ -25,7 +25,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'airblade/vim-gitgutter'
     Plug 'Xuyuanp/nerdtree-git-plugin'
    
-    
+    " additional features for programming    
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'preservim/nerdcommenter'
@@ -109,8 +109,8 @@ let g:go_def_mapping_enabled = 1
 " -- neovim terminal settings 
 " ------------------------------------------ 
 nnoremap <C-z> :12sp \| term<CR>
-tnoremap <esc> <C-\><:q!CR>
-
+tnoremap <esc> <C-\><C-n>:q
+autocmd TermOpen * startinsert
 
 " ------------------------------------------
 " -- editor overrides 
