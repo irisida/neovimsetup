@@ -9,20 +9,26 @@ filetype plugin indent on   " required
 " -- plugins settings 
 " -------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
+    " color scheme
     Plug 'joshdick/onedark.vim'
-    Plug 'tpope/vim-fugitive'
-    Plug 'preservim/nerdtree'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'fatih/vim-go'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'preservim/nerdcommenter'
     Plug 'ryanoasis/vim-webdevicons'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
+    
+    " navigation 
+    Plug 'scrooloose/nerdtree'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do' : './install --all' }
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
+   
+    " git related 
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+   
+    
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'preservim/nerdcommenter'
 call plug#end()
 
 " ------------------------------------------- 
@@ -31,6 +37,7 @@ call plug#end()
 colorscheme onedark
 " airline bottom bar theme 
 let g:airline_theme='bubblegum'
+let g:airline_powerline_fonts = 1 
 " GVim
 
 " auto reloading changed files
@@ -42,7 +49,7 @@ let g:airline_theme='bubblegum'
 
 
 " -- general vim set options 
-set number
+set number relativenumber
 set wrap
 set smartcase
 set hlsearch
@@ -72,8 +79,8 @@ nmap @@@ <plug>NERDCommenterToggle
 " -- 'a' to create and lead with a '/' for
 " -- directory creation 
 " -------------------------------------------
-nmap <silent> <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=52
+nmap <silent> <C-n> :NERDTreeToggle<CR>
 " NERDTree auto opening directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
@@ -95,11 +102,28 @@ let g:coc_global_extensions = [
 
 " language related 
 let g:go_fmt_autosave = 1
+let g:go_def_mapping_enabled = 1
+
 
 " ------------------------------------------
 " -- neovim terminal settings 
 " ------------------------------------------ 
-nnoremap <C-t> :12sp \| term<CR>
+nnoremap <C-z> :12sp \| term<CR>
 tnoremap <esc> <C-\><:q!CR>
 
 
+" ------------------------------------------
+" -- editor overrides 
+" ------------------------------------------
+nnoremap <C-a> ggVG
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
