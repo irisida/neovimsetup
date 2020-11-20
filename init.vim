@@ -16,8 +16,9 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ryanoasis/vim-webdevicons'
     
     " navigation 
-    Plug 'scrooloose/nerdtree'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do' : './install --all' }
+    Plug 'preservim/nerdtree'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
    
     " git related 
@@ -79,7 +80,10 @@ nmap @@@ <plug>NERDCommenterToggle
 " -- 'a' to create and lead with a '/' for
 " -- directory creation 
 " -------------------------------------------
+set lazyredraw
 let g:NERDTreeWinSize=52
+let NERDTreeHighlightCursorline = 0
+
 nmap <silent> <C-n> :NERDTreeToggle<CR>
 " NERDTree auto opening directory
 autocmd StdinReadPre * let s:std_in=1
@@ -87,6 +91,11 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
 nmap <Leader>r :NERDTreeRefreshRoot
+
+" ------------------------------------------
+" -- fzf 
+" ------------------------------------------
+nnoremap <C-f> :Files<CR>
 
 " ------------------------------------------
 " -- Intellisense and code completion with 
