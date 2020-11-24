@@ -14,7 +14,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'ryanoasis/vim-webdevicons'
-    
+    Plug 'dracula/vim', { 'as': 'dracula' }
+
     " navigation 
     Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -35,7 +36,9 @@ call plug#end()
 " ------------------------------------------- 
 " -- Theme settings 
 " -- ---------------------------------------- 
+set termguicolors
 colorscheme onedark
+set syntax
 " airline bottom bar theme 
 let g:airline_theme='bubblegum'
 let g:airline_powerline_fonts = 1 
@@ -119,6 +122,7 @@ let g:go_def_mapping_enabled = 1
 " ------------------------------------------
 " -- neovim terminal settings 
 " ------------------------------------------ 
+"nmap <D-z> :12sp \| term<CR>
 nnoremap <C-z> :12sp \| term<CR>
 tnoremap <esc> <C-\><C-n>:q
 autocmd TermOpen * startinsert
