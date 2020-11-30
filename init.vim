@@ -155,3 +155,10 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 " suggested cut & paste override
 set clipboard=unnamedplus
+
+
+" ------------------------------------------
+" neovim opacity
+" ------------------------------------------
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
