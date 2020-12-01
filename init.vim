@@ -15,14 +15,15 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'ryanoasis/vim-webdevicons'
     Plug 'dracula/vim', { 'as': 'dracula' }
-    Plug 'ayu-theme/ayu-vim' "
+    Plug 'ayu-theme/ayu-vim'
 
 
     " navigation
-    Plug 'preservim/nerdtree'
+    "Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    Plug 'vifm/vifm.vim' 
 
     " git related
     Plug 'tpope/vim-fugitive'
@@ -33,6 +34,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'preservim/nerdcommenter'
+    Plug 'ap/vim-css-color'
 call plug#end()
 
 " -------------------------------------------
@@ -47,7 +49,7 @@ colorscheme onedark
 "let ayucolor="mirage"
 "colorscheme ayu
 
-set syntax
+" set syntax
 
 " --------------------------------------------
 " airline bottom bar theme
@@ -80,11 +82,18 @@ set splitright
 " -------------------------------------------
 " -- NERDCommenter settings are set to @@@
 " -- this is configured to be sent in iterm2
-" -- when user type 'cmd /'
+" -- when u:ser type 'cmd /'
 " -------------------------------------------
-vmap @@@ <plug>NERDCommenterToggle
-nmap @@@ <plug>NERDCommenterToggle
+" vmap @@@ <plug>NERDCommenterToggle
+" nmap @@@ <plug>NERDCommenterToggle
 
+" -------------------------------------------
+" -- vifm settings 
+" -------------------------------------------
+let g:vifm_replace_netrw = 1
+let g:vifm_replace_netrw_cmd ="Vifm"
+let g:vifm_embed_split=1
+let g:vifm_embed_term=1
 
 " -------------------------------------------
 " -- NERDTree settings
@@ -95,16 +104,17 @@ nmap @@@ <plug>NERDCommenterToggle
 " -- directory creation
 " -------------------------------------------
 set lazyredraw
-let g:NERDTreeWinSize=52
-let NERDTreeHighlightCursorline = 0
+"let g:NERDTreeWinSize=52
+"let NERDTreeHighlightCursorline = 0
+"let NERDTreeShowHidden=1
 
-nmap <silent> <C-n> :NERDTreeToggle<CR>
+"nmap <silent> <C-n> :NERDTreeToggle<CR>
 " NERDTree auto opening directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
-nmap <Leader>r :NERDTreeRefreshRoot
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
+"nmap <Leader>r :NERDTreeRefreshRoot
 
 " ------------------------------------------
 " -- fzf
@@ -134,7 +144,7 @@ let g:go_def_mapping_enabled = 1
 " -- neovim terminal settings
 " ------------------------------------------
 "nmap <D-z> :12sp \| term<CR>
-nnoremap <C-z> :12sp \| term<CR>
+nnoremap <C-z> :10sp \| term<CR>
 tnoremap <esc> <C-\><C-n>:q
 autocmd TermOpen * startinsert
 
