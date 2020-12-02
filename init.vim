@@ -102,17 +102,6 @@ let g:vifm_embed_term=1
 " -- directory creation
 " -------------------------------------------
 set lazyredraw
-"let g:NERDTreeWinSize=52
-"let NERDTreeHighlightCursorline = 0
-"let NERDTreeShowHidden=1
-
-"nmap <silent> <C-n> :NERDTreeToggle<CR>
-" NERDTree auto opening directory
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
-"nmap <Leader>r :NERDTreeRefreshRoot
 
 " ------------------------------------------
 " -- fzf
@@ -132,6 +121,13 @@ let g:coc_global_extensions = [
 \ 'coc-go',
 \ 'coc-json'
 \ ]
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " language related
 let g:go_fmt_autosave = 1
