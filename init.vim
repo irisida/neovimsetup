@@ -19,10 +19,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 
     " navigation
-    "Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'vifm/vifm.vim' 
 
     " git related
@@ -144,15 +142,18 @@ let g:go_def_mapping_enabled = 1
 " -- neovim terminal settings
 " ------------------------------------------
 "nmap <D-z> :12sp \| term<CR>
-nnoremap <C-z> :10sp \| term<CR>
-tnoremap <esc> <C-\><C-n>:q
+nnoremap z :15sp \| term<CR>
+tnoremap `z <C-\><C-n>:q<cr>
 autocmd TermOpen * startinsert
 
 " ------------------------------------------
 " -- editor overrides
 " ------------------------------------------
+" start vifm
+nnoremap m :Vifm<cr>
+"select all
 nnoremap <C-a> ggVG
-" " Copy to clipboard
+" Copy to clipboard
 vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
@@ -172,3 +173,4 @@ set clipboard=unnamedplus
 " ------------------------------------------
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
+
