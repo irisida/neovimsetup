@@ -33,6 +33,11 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'preservim/nerdcommenter'
     Plug 'ap/vim-css-color'
+
+    " debugger for go 
+    Plug 'sebdah/vim-delve'
+
+
 call plug#end()
 
 " -------------------------------------------
@@ -124,11 +129,20 @@ let g:coc_global_extensions = [
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" ------------------------------------------
 " language related
 let g:go_fmt_autosave = 1
 let g:go_def_mapping_enabled = 1
@@ -137,10 +151,14 @@ let g:go_def_mapping_enabled = 1
 " ------------------------------------------
 " -- neovim terminal settings
 " ------------------------------------------
-"nmap <D-z> :12sp \| term<CR>
+" OSX settings 
 nnoremap z :15sp \| term<CR>
 tnoremap `z <C-\><C-n>:q<cr>
 autocmd TermOpen * startinsert
+
+" WINDOWS settings 
+"tnoremap \z <C-\><C-n>:q<cr>
+
 
 " ------------------------------------------
 " -- editor overrides
@@ -165,8 +183,20 @@ set clipboard=unnamedplus
 
 
 " ------------------------------------------
-" neovim opacity
+" -- neovim opacity
 " ------------------------------------------
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 
+" ------------------------------------------
+" -- mapleader 
+" ------------------------------------------
+let mapleader=","
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+" go specific
+let g:go_auto_type_info = 1
+set updatetime=40
