@@ -32,7 +32,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'preservim/nerdcommenter'
-    Plug 'ap/vim-css-color'
+    Plug 'chrisbra/Colorizer'
+    Plug 'mattn/emmet-vim'
 
     " debugger for go 
     Plug 'sebdah/vim-delve'
