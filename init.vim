@@ -1,8 +1,8 @@
 " curl -flo $HOME/.config/nvim/autoload/plug.vim --create-dirs \
 "         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-set nocompatible      " be iMproved, required
-filetype off          " required
+set nocompatible            " be iMproved, required
+filetype off                " required
 filetype plugin indent on   " required
 
 " -------------------------------------------
@@ -37,38 +37,23 @@ call plug#begin('~/.config/nvim/plugged')
     " debugger for go 
     Plug 'sebdah/vim-delve'
 
-
 call plug#end()
 
 " -------------------------------------------
 " -- Theme settings
 " -- ----------------------------------------
 set termguicolors
-
-" onedark specific
-colorscheme onedark
-
-" aye specific
-"let ayucolor="mirage"
-"colorscheme ayu
-
-" set syntax
+colorscheme onedark  
 
 " --------------------------------------------
-" airline bottom bar theme
+" -- airline bottom bar theme
+" --------------------------------------------
 let g:airline_theme='bubblegum'
 let g:airline_powerline_fonts = 1
-" GVim
 
-" auto reloading changed files
-"set autoread
-"autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-" notification after file change
-"autocmd FileChangedShellPost *
-"\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-
-
+" --------------------------------------------
 " -- general vim set options
+" --------------------------------------------
 set number relativenumber
 set wrap
 set smartcase
@@ -83,14 +68,6 @@ set splitbelow
 set splitright
 
 " -------------------------------------------
-" -- NERDCommenter settings are set to @@@
-" -- this is configured to be sent in iterm2
-" -- when u:ser type 'cmd /'
-" -------------------------------------------
-" vmap @@@ <plug>NERDCommenterToggle
-" nmap @@@ <plug>NERDCommenterToggle
-
-" -------------------------------------------
 " -- vifm settings 
 " -------------------------------------------
 let g:vifm_replace_netrw = 1
@@ -98,14 +75,6 @@ let g:vifm_replace_netrw_cmd ="Vifm"
 let g:vifm_embed_split=1
 let g:vifm_embed_term=1
 
-" -------------------------------------------
-" -- NERDTree settings
-" -- the tree is toggled with 'ctrl n' combo
-" -- window switcher is 'ctrl ww'
-" -- the tree menu is opened with 'm'
-" -- 'a' to create and lead with a '/' for
-" -- directory creation
-" -------------------------------------------
 set lazyredraw
 
 " ------------------------------------------
@@ -144,19 +113,22 @@ let g:coc_snippet_next = '<tab>'
 
 " ------------------------------------------
 " language related
+" ------------------------------------------
 let g:go_fmt_autosave = 1
 let g:go_def_mapping_enabled = 1
 
 
 " ------------------------------------------
-" -- neovim terminal settings
+" -- NEOVIM terminal settings
 " ------------------------------------------
-" OSX settings 
+" -- OSX settings 
+" ------------------------------------------
 nnoremap z :15sp \| term<CR>
 tnoremap `z <C-\><C-n>:q<cr>
 autocmd TermOpen * startinsert
-
-" WINDOWS settings 
+" ------------------------------------------
+" -- WINDOWS settings 
+" ------------------------------------------
 "tnoremap \z <C-\><C-n>:q<cr>
 
 
@@ -165,7 +137,7 @@ autocmd TermOpen * startinsert
 " ------------------------------------------
 " start vifm
 nnoremap m :Vifm<cr>
-"select all
+" select all
 nnoremap <C-a> ggVG
 " Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -173,7 +145,7 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
-" " Paste from clipboard
+" Paste from clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
@@ -189,7 +161,12 @@ hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 
 " ------------------------------------------
-" -- mapleader 
+" -- GOLANG specific
+" ------------------------------------------
+let g:go_auto_type_info = 1
+set updatetime=30
+" ------------------------------------------
+" -- GOLANG and MAPLEADER 
 " ------------------------------------------
 let mapleader=","
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -197,6 +174,3 @@ au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 
-" go specific
-let g:go_auto_type_info = 1
-set updatetime=40
