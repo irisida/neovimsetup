@@ -67,6 +67,7 @@ set expandtab
 set smartindent
 set splitbelow
 set splitright
+set signcolumn=yes
 
 " -------------------------------------------
 " -- vifm settings 
@@ -175,3 +176,7 @@ au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 
+" ------------------------------------------
+" -- emmet
+" ------------------------------------------
+let g:user_emmet_leader_key='<C-e>'
